@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CsvReaderApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CsvReaderApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(CsvReaderApplication.class, args);
+    }
 }
