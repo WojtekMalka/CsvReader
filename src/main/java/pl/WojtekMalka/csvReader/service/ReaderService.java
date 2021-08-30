@@ -1,2 +1,4 @@
-package pl.WojtekMalka.csvReader.service;public class ReaderService {
+package pl.WojtekMalka.csvReader.service;
+
+public class ReaderService {
 }
