@@ -10,7 +10,6 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-@Builder
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +21,5 @@ public class Client {
     private String phone_no;
 
     public Client() {
-
     }
 }

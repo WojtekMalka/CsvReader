@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ClientRepository {
     List<Client> findAll();
+
+    Client save(Client entity);
 }
