@@ -1,5 +1,6 @@
-package pl.WojtekMalka.csvReader.Controller;
+package pl.WojtekMalka.csvReader.controller;
 
+import com.opencsv.exceptions.CsvException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.WojtekMalka.csvReader.repository.ClientRepository;
+import pl.WojtekMalka.csvReader.service.ReaderService;
+
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,7 +24,7 @@ public class ClientController {
     private final ClientRepository clientRepository;
 
     @GetMapping("/view")
-    String getAllUserViewPage(Model model){
+    String getAllUserViewPage(Model model) throws IOException, CsvException {
         model.addAttribute("client", clientRepository.findAll());
         return PAGE_CLIENT_VIEW;
     }
