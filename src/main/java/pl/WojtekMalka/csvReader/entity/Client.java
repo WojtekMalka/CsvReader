@@ -14,7 +14,7 @@ import javax.persistence.Id;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long clientId;
 
     private String first_name;
     private String last_name;
