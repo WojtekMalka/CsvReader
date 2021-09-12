@@ -5,12 +5,14 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
+import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+@Service
 public class ReaderService {
 
     private static final String fileName = "C:\\Users\\WojtekM\\Repozytorium\\testInput.csv";
