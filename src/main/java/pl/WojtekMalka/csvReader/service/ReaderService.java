@@ -11,21 +11,34 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReaderService {
 
-    private static final String fileName = "C:\\Users\\WojtekM\\Repozytorium\\testInput.csv";
+    /*TODO
+    * -logowanie
+    * */
 
-    public static void readAndParseCSV() throws IOException, CsvException {
+    private static final String fileSourceDirectory = "C:\\Users\\WojtekM\\Repozytorium\\testInput.csv";
+
+    public static List<String[]> readFile(String fileSourceDirectory) throws IOException, CsvException {
         CSVParser csvParser = new CSVParserBuilder().withSeparator(';').build();
         try (CSVReader reader = new CSVReaderBuilder(
-                new FileReader(fileName))
+                new FileReader(fileSourceDirectory))
                 .withCSVParser(csvParser)
                 .withSkipLines(1)
                 .build()) {
-            List<String[]> line = reader.readAll();
-            line.forEach(x -> System.out.println(Arrays.toString(x)));
+            return reader.readAll();
         }
+        /*TODO
+        *  -stworzyć błąd NonFileFound
+        * - obsługa błędu
+        * */
+    }
+
+    public static List<String> oneReadedLine(List<String[]> input, Integer lineNumber) {
+        String[] strings = input.get(lineNumber);
+        return Arrays.stream(strings).collect(Collectors.toList());
     }
 }
