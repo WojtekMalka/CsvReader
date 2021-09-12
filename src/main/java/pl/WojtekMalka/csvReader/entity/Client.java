@@ -10,11 +10,10 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-@Builder
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long clientId;
 
     private String first_name;
     private String last_name;
@@ -22,6 +21,5 @@ public class Client {
     private String phone_no;
 
     public Client() {
-
     }
 }
