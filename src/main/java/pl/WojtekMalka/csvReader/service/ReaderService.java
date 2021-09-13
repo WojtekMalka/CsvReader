@@ -7,6 +7,7 @@ import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -16,9 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class ReaderService {
 
-    /*TODO
-    * -logowanie
-    * */
+    /*TODO -logowanie*/
 
     private static final String fileSourceDirectory = "C:\\Users\\WojtekM\\Repozytorium\\testInput.csv";
 
@@ -31,14 +30,13 @@ public class ReaderService {
                 .build()) {
             return reader.readAll();
         }
-        /*TODO
-        *  -stworzyć błąd NonFileFound
-        * - obsługa błędu
-        * */
+        /*TODO -stworzyć błąd NonFileFound, obsługa błędu */
     }
 
     public static List<String> oneReadedLine(List<String[]> input, Integer lineNumber) {
         String[] strings = input.get(lineNumber);
         return Arrays.stream(strings).collect(Collectors.toList());
     }
+
+
 }
