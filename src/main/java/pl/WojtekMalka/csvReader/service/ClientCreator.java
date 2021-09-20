@@ -1,9 +1,6 @@
 package pl.WojtekMalka.csvReader.service;
 
 import org.springframework.stereotype.Service;
-import pl.WojtekMalka.csvReader.entity.Client;
-
-import java.util.List;
 
 @Service
 public class ClientCreator {

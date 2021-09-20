@@ -6,12 +6,12 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
 import org.springframework.stereotype.Service;
-import pl.WojtekMalka.csvReader.dictionary.CsvColumns;
+import pl.WojtekMalka.csvReader.dictionary.ClientDictionary;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.EnumMap;
+import java.util.List;
 
 @Service
 public class ReaderService {
@@ -19,6 +19,12 @@ public class ReaderService {
     /*TODO -logowanie*/
 
     private static final String fileSourceDirectory = "C:\\Users\\WojtekM\\Repozytorium\\testInput.csv";
+
+    public ReaderService() {
+    }
+
+    public ReaderService(String fileSource) {
+    }
 
     public static List<String[]> readFile(String fileSourceDirectory) throws IOException, CsvException {
         CSVParser csvParser = new CSVParserBuilder().withSeparator(';').build();
@@ -32,15 +38,15 @@ public class ReaderService {
         /*TODO -stworzyć błąd NonFileFound, obsługa błędu */
     }
 
-    public static List<String> readOneLine(List<String[]> input, Integer lineNumber) {
-        return Arrays.stream(input.get(lineNumber)).collect(Collectors.toList());
-    }
+    public static EnumMap<ClientDictionary, String> getOneClientData(List<String[]> input, Integer lineNumber) {
+        String[] strings = input.get(lineNumber);
+        EnumMap<ClientDictionary, String> oneLineInMap = new EnumMap<>(ClientDictionary.class);
 
-    public static Map<String, String> parseFileToMap(){
-        Map<CsvColumns, String> csvColumnsMap = CsvColumns.getCsvColumnsMap();
-        for (int i = 0; i <csvColumnsMap.size() ; i++) {
-            /*TODO - dodawanie wartośći do mapy z istniejącymi kluczami*/
-        }
-        return null;
+        oneLineInMap.put(ClientDictionary.FIRST_NAME, strings[0]);
+        oneLineInMap.put(ClientDictionary.LAST_NAME, strings[1]);
+        oneLineInMap.put(ClientDictionary.BIRTH_DATE, strings[2]);
+        oneLineInMap.put(ClientDictionary.PHONE_NO, strings[3]);
+
+        return oneLineInMap;
     }
 }
