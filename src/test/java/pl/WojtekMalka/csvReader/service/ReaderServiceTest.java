@@ -34,6 +34,6 @@ class ReaderServiceTest {
         oneLineInMap.put(ClientDictionary.LAST_NAME, "Testowy");
         oneLineInMap.put(ClientDictionary.BIRTH_DATE, "1988.11.11");
         oneLineInMap.put(ClientDictionary.PHONE_NO, "600700800");
-        assertEquals(oneLineInMap, readOneLine(sourceFile, 0));
+        assertEquals(oneLineInMap, getOneClientData(sourceFile, 0));
     }
 }
