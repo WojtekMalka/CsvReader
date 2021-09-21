@@ -25,7 +25,7 @@ public class HomeController {
 
     private static final String PAGE_HOME = "home";
 
-    private static final String UPLOAD_DIR = "./uploads/";
+    private static final String UPLOAD_DIR = "C:\\Users\\WojtekM\\Repozytorium\\";
 
     @GetMapping("/")
     String showHome(Model model) {
