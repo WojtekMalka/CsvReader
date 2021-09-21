@@ -10,12 +10,13 @@
 <h1>CsvReader</h1>
 <fieldset>
     <legend>Load File</legend>
-<!--    <p th:text="${fileNotFoundMessage}"/>-->
+    <p th:text="${message}"/>
     <form method="post" th:action="@{/loadFile}" enctype="multipart/form-data">
         <div class="form-group">
             <input type="file" name="file" class="form-control-file">
         </div>
         <button type="submit" class="btn btn-primary">Upload File</button>
+<!--        <button type="button"><a th:href="@{saveFile}">Save</a></button>-->
     </form>
 </fieldset>
 </main>

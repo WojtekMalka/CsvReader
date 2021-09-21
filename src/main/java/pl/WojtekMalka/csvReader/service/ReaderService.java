@@ -20,7 +20,7 @@ public class ReaderService {
 
     private static Logger logger = LoggerFactory.getLogger(ReaderService.class);
 
-    private static final String fileSourceDirectory = "C:\\Users\\WojtekM\\Repozytorium\\testInput.csv";
+    private static final String fileSourceDirectory = "C:\\Users\\WojtekM\\Repozytorium\\Test.csv";
 
     public ReaderService(String s) {
     }
