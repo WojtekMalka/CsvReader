@@ -6,12 +6,18 @@
     <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm_theme_mischka.min.css">
 </head>
 <body>
+<main>
 <h1>CsvReader</h1>
 <fieldset>
-    <legend>User</legend>
-    <button><a th:href="@{'/loadFile'}">Load</a></button>
+    <legend>Load File</legend>
+    <p th:text="${fileNotFoundMessage}"/>
+    <form method="post" th:action="@{/loadFile}" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="file" name="file" class="form-control-file">
+        </div>
+        <button type="submit" class="btn btn-primary">Upload File</button>
+    </form>
 </fieldset>
-<fieldset>
-
+</main>
 </body>
 </html>
