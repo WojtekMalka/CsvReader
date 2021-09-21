@@ -11,7 +11,6 @@ import java.io.IOException;
 public class CsvReaderApplication {
 
     public static void main(String[] args) throws IOException, CsvException {
-//        SpringApplication.run(CsvReaderApplication.class, args);
-//        ReaderService.readAndParseCSV();
+        SpringApplication.run(CsvReaderApplication.class, args);
     }
 }
