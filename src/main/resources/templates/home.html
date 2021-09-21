@@ -2,9 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm_theme_mischka.min.css">
 </head>
 <body>
-<h1>Users</h1>
+<h1>CsvReader</h1>
+<fieldset>
+    <legend>User</legend>
+    <button><a th:href="@{'/loadFile'}">Load</a></button>
+</fieldset>
+<fieldset>
+
 </body>
 </html>
