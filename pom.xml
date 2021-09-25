@@ -12,7 +12,7 @@
     <artifactId>csvReader</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>csvReader</name>
-    <description>Zadanie rekrutacyjne 1</description>
+    <description>Application for read CSV file</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -93,6 +93,12 @@
             <artifactId>commons-csv</artifactId>
             <version>1.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
