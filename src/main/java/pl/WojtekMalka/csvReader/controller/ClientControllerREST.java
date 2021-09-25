@@ -14,12 +14,12 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("/client")
-public class ClientController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
+public class ClientControllerREST {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClientControllerREST.class);
 
     private final ClientRepository clientRepository;
 
-    public ClientController(ClientRepository clientRepository) {
+    public ClientControllerREST(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
 

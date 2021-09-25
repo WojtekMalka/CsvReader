@@ -3,7 +3,6 @@ package pl.WojtekMalka.csvReader;
 import com.opencsv.exceptions.CsvException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pl.WojtekMalka.csvReader.service.ReaderService;
 
 import java.io.IOException;
 
