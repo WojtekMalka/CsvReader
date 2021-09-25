@@ -10,12 +10,13 @@ import pl.WojtekMalka.csvReader.entity.Client;
 import pl.WojtekMalka.csvReader.repository.ClientRepository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/client")
 public class ClientController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
-    
+
     private final ClientRepository clientRepository;
 
     public ClientController(ClientRepository clientRepository) {
@@ -29,4 +30,26 @@ public class ClientController {
         }
         return ResponseEntity.ok(clientRepository.findAll());
     }
+
+    @GetMapping("/sortedByAge")
+    ResponseEntity<List<Client>> readAllClientsSortedByAge() {
+        if (clientRepository.findByBirth_dateByOOrderByBirth_date().isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(clientRepository.findByBirth_dateByOOrderByBirth_date());
+    }
+
+    @GetMapping("/count")
+    ResponseEntity<Integer> countClients() {
+        return ResponseEntity.ok(clientRepository.countClientByClientId());
+    }
+
+    @GetMapping("/getClientOrderByAgeAndNotNullPhone")
+    ResponseEntity<Client> getClientOrderByAgeAndNotNullPhone() {
+        if (Objects.isNull(clientRepository.findClientByBirth_dateAndPhone_noIsNotNull())) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(clientRepository.findClientByBirth_dateAndPhone_noIsNotNull());
+    }
 }
+
