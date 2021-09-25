@@ -23,8 +23,8 @@ import java.nio.charset.StandardCharsets;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/load")
-public class LoadController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoadController.class);
+public class LoadControllerREST {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoadControllerREST.class);
 
     private final ClientRepository clientRepository;
 
