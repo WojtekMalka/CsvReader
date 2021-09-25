@@ -1,6 +1,6 @@
 package pl.WojtekMalka.csvReader.service;
 
-import org.apache.commons.text.WordUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -10,13 +10,14 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 @Service
 public class ClientDataParser {
 
-    private static Logger logger = LoggerFactory.getLogger(ReaderService.class);
+    private static Logger logger = LoggerFactory.getLogger(ClientDataParser.class);
 
-    public static void parse(String input) {
+    public static String cleanInput(String input) {
         logger.info("ClientDataParser input: {}", input);
         cleanWhiteSpacesAndFillsUpEmpty(input);
         correctLettersSizeInString(input);
         logger.info("ClientDataParser output: {}", input);
+        return input;
     }
 
     private static void correctLettersSizeInString(String input) {
