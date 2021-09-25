@@ -1,6 +1,5 @@
 package pl.WojtekMalka.csvReader.entity;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
