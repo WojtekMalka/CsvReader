@@ -9,4 +9,6 @@ import java.util.List;
 
 @Repository
 interface SqlClientRepository extends ClientRepository, JpaRepository<Client, Long> {
+//    @Override
+//    List<Client> findClientByBirth_dateAndPhone_noIsNotNull;
 }
