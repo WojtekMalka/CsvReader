@@ -1,16 +1,13 @@
 package pl.WojtekMalka.csvReader.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import pl.WojtekMalka.csvReader.entity.Client;
 
 import java.util.List;
 
-public interface ClientRepository {
-    List<Client> findAll();
-
-    Client save(Client entity);
-
-//    Integer countClientByClientId();
-//    List<Client> findByBirth_dateByOOrderByBirth_date();
-//
-//    Client findClientByBirth_dateAndPhone_noIsNotNull();
+@Repository
+public interface ClientRepository extends JpaRepository<Client, Long> {
+    @Override
+    <S extends Client> List<S> saveAll(Iterable<S> entities);
 }
