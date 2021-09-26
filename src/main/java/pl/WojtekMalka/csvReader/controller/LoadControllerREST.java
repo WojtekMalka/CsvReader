@@ -7,13 +7,12 @@ import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import pl.WojtekMalka.csvReader.entity.Client;
 import pl.WojtekMalka.csvReader.repository.ClientRepository;
-import static pl.WojtekMalka.csvReader.service.ClientDataParser.cleanInput;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -21,7 +20,9 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-@Controller
+import static pl.WojtekMalka.csvReader.service.ClientDataParser.cleanInput;
+
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/load")
 public class LoadControllerREST {
@@ -45,6 +46,7 @@ public class LoadControllerREST {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.created(URI.create(("/load/") + sourceURL)).build();
     }
