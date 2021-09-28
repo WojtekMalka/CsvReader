@@ -1,25 +1,22 @@
 package pl.WojtekMalka.csvReader.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.WojtekMalka.csvReader.DTO.ClientDTO;
 import pl.WojtekMalka.csvReader.entity.Client;
-import pl.WojtekMalka.csvReader.message.ResponseMessage;
-import pl.WojtekMalka.csvReader.repository.ClientRepository;
 import pl.WojtekMalka.csvReader.service.ClientService;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/client")
 public class ClientControllerREST {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClientControllerREST.class);
-
-    ClientService clientService;
+    private final ClientService clientService;
 
     @GetMapping("/getAll")
     ResponseEntity<List<Client>> readAllClients() {
@@ -27,6 +24,14 @@ public class ClientControllerREST {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.status(HttpStatus.OK).body(clientService.getAllClients());
+    }
+
+    @GetMapping("/getClientsListSortedByAge")
+    ResponseEntity<List<ClientDTO>> getClientsListSortedByAge() {
+        if (clientService.getClientsListSortedByAge().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(clientService.getClientsListSortedByAge());
     }
 }
 

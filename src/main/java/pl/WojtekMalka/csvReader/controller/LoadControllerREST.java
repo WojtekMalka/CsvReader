@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import pl.WojtekMalka.csvReader.message.ResponseMessage;
 import pl.WojtekMalka.csvReader.service.ClientService;
+import pl.WojtekMalka.csvReader.service.FileReader;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,13 +24,17 @@ public class LoadControllerREST {
 
     @PostMapping("/loadFile")
     ResponseEntity<ResponseMessage> loadFile(@RequestParam("file") MultipartFile file) {
-        try {
-            clientService.save(file);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseMessage("Uploaded the file successfully: " + file.getOriginalFilename()));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
-                    .body(new ResponseMessage("Could not upload the file: " + file.getOriginalFilename() + "!"));
+        if (FileReader.hasCSVFormat(file)) {
+            try {
+                clientService.save(file);
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ResponseMessage("Uploaded the file successfully: " + file.getOriginalFilename()));
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                        .body(new ResponseMessage("Could not upload the file: " + file.getOriginalFilename() + "!"));
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Please upload a csv file!"));
         }
     }
 }
