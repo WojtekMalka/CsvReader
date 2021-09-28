@@ -1,53 +1,40 @@
 package pl.WojtekMalka.csvReader.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.WojtekMalka.csvReader.entity.Client;
-import pl.WojtekMalka.csvReader.repository.ClientRepository;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-
-import static pl.WojtekMalka.csvReader.service.ClientDataParser.cleanInput;
+import org.springframework.web.multipart.MultipartFile;
+import pl.WojtekMalka.csvReader.message.ResponseMessage;
+import pl.WojtekMalka.csvReader.service.ClientService;
+import pl.WojtekMalka.csvReader.service.FileReader;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/load")
+@RequestMapping("/")
 public class LoadControllerREST {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoadControllerREST.class);
 
-    private final ClientRepository clientRepository;
+    private final ClientService clientService;
 
-    @PostMapping("/load/{sourceURL}")
-    ResponseEntity<?> loadFile(@RequestParam("sourceURL") String sourceURL) throws MalformedURLException {
-        URL url = new URL(sourceURL);
-        CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase();
-
-        try (CSVParser csvParser = CSVParser.parse(url, StandardCharsets.UTF_8, csvFormat)) {
-            for (CSVRecord csvRecord : csvParser) {
-                Client client = new Client();
-                client.setFirst_name(cleanInput(csvRecord.get("first_name")));
-                client.setLast_name(cleanInput(csvRecord.get("last_name")));
-                client.setBirth_date(cleanInput(csvRecord.get("birth_date")));
-                client.setPhone_no(cleanInput(csvRecord.get("phone_number")));
-                clientRepository.save(client);
+    @PostMapping("/loadFile")
+    ResponseEntity<ResponseMessage> loadFile(@RequestParam("file") MultipartFile file) {
+        if (FileReader.hasCSVFormat(file)) {
+            try {
+                clientService.save(file);
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ResponseMessage("Uploaded the file successfully: " + file.getOriginalFilename()));
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                        .body(new ResponseMessage("Could not upload the file: " + file.getOriginalFilename() + "!"));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Please upload a csv file!"));
         }
-        return ResponseEntity.created(URI.create(("/load/") + sourceURL)).build();
     }
 }

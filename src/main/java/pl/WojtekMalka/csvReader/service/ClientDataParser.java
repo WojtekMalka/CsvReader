@@ -1,37 +1,21 @@
 package pl.WojtekMalka.csvReader.service;
 
+import com.sun.xml.bind.v2.TODO;
 import org.apache.commons.lang3.text.WordUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-@Service
 public class ClientDataParser {
-
-    private static Logger logger = LoggerFactory.getLogger(ClientDataParser.class);
-
-    public static String cleanInput(String input) {
-        logger.info("ClientDataParser input: {}", input);
-        cleanWhiteSpacesAndFillsUpEmpty(input);
-        correctLettersSizeInString(input);
-        logger.info("ClientDataParser output: {}", input);
+    public static String parseName(String input) {
+        input.trim().toLowerCase();
+        WordUtils.capitalize(input);
         return input;
     }
 
-    private static void correctLettersSizeInString(String input) {
-        if (input.getClass().equals(String.class)) {
-            input.toLowerCase();
-            WordUtils.capitalize(input);
-        }
-    }
-
-    private static void cleanWhiteSpacesAndFillsUpEmpty(String input) {
-        if (isEmpty(input)) {
-            input = "empty";
-        } else {
-            input.trim();
-        }
+    /*TODO
+    *   do sparsowania 1999.1.1*/
+    public static String parseDate(String input) {
+        return String.valueOf(LocalDate.parse(input, DateTimeFormatter.ofPattern("yyyy.MM.dd")));
     }
 }
