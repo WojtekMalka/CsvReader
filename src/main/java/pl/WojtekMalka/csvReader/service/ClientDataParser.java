@@ -18,15 +18,27 @@ public class ClientDataParser {
             String correctMonth;
             String correctDay;
 
-            correctMonth = getCorrectFormat(splitedInput[1]);
-            correctDay = getCorrectFormat(splitedInput[2]);
+            correctMonth = createCorrectMonthOrDayFormat(getMonth(splitedInput));
+            correctDay = createCorrectMonthOrDayFormat(getDay(splitedInput));
 
-            return correctDateBuilder(splitedInput[0], correctMonth, correctDay);
+            return buildCorrectDate(getYear(splitedInput), correctMonth, correctDay);
         }
         return input;
     }
 
-    private static String correctDateBuilder(String str, String correctMonth, String correctDay) {
+    private static String getYear(String[] splitedInput) {
+        return splitedInput[0];
+    }
+
+    private static String getDay(String[] splitedInput) {
+        return splitedInput[2];
+    }
+
+    private static String getMonth(String[] splitedInput) {
+        return splitedInput[1];
+    }
+
+    private static String buildCorrectDate(String str, String correctMonth, String correctDay) {
         StringBuilder sb = new StringBuilder();
         return sb.append(str)
                 .append(DOT)
@@ -36,7 +48,7 @@ public class ClientDataParser {
                 .toString();
     }
 
-    private static String getCorrectFormat(String splitedInput) {
+    private static String createCorrectMonthOrDayFormat(String splitedInput) {
         if (splitedInput.length() == 1) {
             return S_0 + splitedInput;
         }
