@@ -14,7 +14,4 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @Override
     long count();
-
-//    @Query(value = "SELECT first_name, last_name, DATEDIFF(year, '2017/08/25', '2011/08/25') AS client_age FROM clients c", nativeQuery = true)
-//    List<Client> get();
 }
