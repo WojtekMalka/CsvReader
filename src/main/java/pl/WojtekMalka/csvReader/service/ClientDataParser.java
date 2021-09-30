@@ -9,9 +9,7 @@ public class ClientDataParser {
     public static final String DOT = ".";
 
     public static String parseName(String input) {
-        input.trim().toLowerCase();
-        WordUtils.capitalize(input);
-        return input;
+        return WordUtils.capitalize(input.trim().toLowerCase());
     }
 
     public static String parseDate(String input) {
