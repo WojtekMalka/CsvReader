@@ -1,9 +1,7 @@
 package pl.WojtekMalka.csvReader.DTO;
 
-import lombok.Builder;
 import lombok.Data;
 
-@Builder
 @Data
 public class ClientDTO {
     private String first_name;
@@ -11,4 +9,5 @@ public class ClientDTO {
     private String birth_date;
     private String phone_no;
     private Integer client_age;
+
 }

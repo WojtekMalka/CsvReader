@@ -11,6 +11,7 @@ import pl.WojtekMalka.csvReader.entity.Client;
 import pl.WojtekMalka.csvReader.service.ClientService;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,20 +19,28 @@ import java.util.List;
 public class ClientControllerREST {
     private final ClientService clientService;
 
+    @GetMapping("/countAll")
+    ResponseEntity<Long> countAll() {
+        if (Objects.isNull(Long.valueOf(clientService.getClientsNumber()))) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(clientService.getClientsNumber());
+    }
+
     @GetMapping("/getAll")
-    ResponseEntity<List<Client>> readAllClients() {
+    ResponseEntity<List<ClientDTO>> readAllClients() {
         if (clientService.getAllClients().isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.status(HttpStatus.OK).body(clientService.getAllClients());
     }
 
-    @GetMapping("/getClientsListSortedByAge")
-    ResponseEntity<List<ClientDTO>> getClientsListSortedByAge() {
-        if (clientService.getClientsListSortedByAge().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(clientService.getClientsListSortedByAge());
-    }
+//    @GetMapping("/getClientsListSortedByAge")
+//    ResponseEntity<List<ClientDTO>> getClientsListSortedByAge() {
+//        if (clientService.getClientsListSortedByAge().isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+//        return ResponseEntity.status(HttpStatus.OK).body(clientService.getClientsListSortedByAge());
+//    }
 }
 

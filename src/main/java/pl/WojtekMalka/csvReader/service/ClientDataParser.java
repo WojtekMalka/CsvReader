@@ -8,13 +8,13 @@ public class ClientDataParser {
     private static final String REGEX_DOT = "\\.";
     private static final String DOT = ".";
 
-    public static String parseName(String input) {
+    public static String parsenIncorecctNameFormat(String input) {
         return WordUtils.capitalize(input.trim().toLowerCase());
     }
 
-    public static String parseDate(String input) {
+    public static String parseIncorrectDateFormat(String input) {
         if (input.matches(INCORRECT_DATE_FORMAT)) {
-            String[] splitedInput = input.split(REGEX_DOT);
+            String[] splitedInput = getSplitedInput(input);
             String correctMonth;
             String correctDay;
 
@@ -24,6 +24,11 @@ public class ClientDataParser {
             return buildCorrectDate(getYear(splitedInput), correctMonth, correctDay);
         }
         return input;
+    }
+
+    private static String[] getSplitedInput(String input) {
+        String[] splitedInput = input.split(REGEX_DOT);
+        return splitedInput;
     }
 
     private static String getYear(String[] splitedInput) {
