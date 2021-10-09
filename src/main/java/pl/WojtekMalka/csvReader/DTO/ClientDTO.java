@@ -8,6 +8,6 @@ public class ClientDTO {
     private String last_name;
     private String birth_date;
     private String phone_no;
-    private Integer client_age;
+    private Long client_age;
 
 }

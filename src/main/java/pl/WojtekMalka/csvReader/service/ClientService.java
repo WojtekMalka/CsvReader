@@ -9,11 +9,13 @@ import pl.WojtekMalka.csvReader.DTO.ClientDTO;
 import pl.WojtekMalka.csvReader.entity.Client;
 import pl.WojtekMalka.csvReader.repository.ClientRepository;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @AllArgsConstructor
 public class ClientService {
 
