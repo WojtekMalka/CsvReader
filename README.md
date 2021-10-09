@@ -20,13 +20,12 @@ and do the following:
 Project is created with:
 * Java 16
 * mySQL
-Freameworks:
 * Spring
 * Hibernate
 	
 ## Setup
-To run this project, install it locally using npm:
+To run this project, clone the repository:
 
-```
-
+```bash
+git clone https://github.com/WojtekMalka/csvReader.git
 ```
