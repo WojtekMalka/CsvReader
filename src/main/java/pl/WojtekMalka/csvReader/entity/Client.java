@@ -4,10 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import static java.time.temporal.ChronoUnit.YEARS;
 
 @Entity
 @Data
@@ -24,6 +20,8 @@ public class Client {
     private String phone_no;
     private Long client_age;
 
+    /*TODO
+    *   nie działa @PrePersist, metoda zwraca prawidłowo*/
 //    @PrePersist
 //    private void countClientAge() {
 //        client_age = Long.valueOf(YEARS.between(LocalDate.parse(birth_date,

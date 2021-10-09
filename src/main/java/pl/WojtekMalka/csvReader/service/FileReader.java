@@ -24,9 +24,8 @@ public class FileReader {
     public static final String PHONE_NO = "phone_no";
 
     public static boolean hasCSVFormat(MultipartFile file) {
-        return (!UPLOADED_DOCUMENT_TYPE.equals(file.getContentType())) ? false : true;
+        return UPLOADED_DOCUMENT_TYPE.equals(file.getContentType());
     }
-
 
     public static List<Client> readCSV(InputStream inputStream) {
         try (BufferedReader fileReader = getFileReader(inputStream);
@@ -53,12 +52,14 @@ public class FileReader {
     private static List<Client> createClients(Iterable<CSVRecord> csvRecords) {
         List<Client> clients = new ArrayList<>();
         for (CSVRecord csvRecord : csvRecords) {
-            Client client = new Client();
-            client.setFirst_name(getTextTypeDataFromColumn(csvRecord, FIRST_NAME));
-            client.setLast_name(getTextTypeDataFromColumn(csvRecord, LAST_NAME));
-            client.setBirth_date(getTimeTypeDataFromColumn(csvRecord, BIRTH_DATE));
-            client.setPhone_no((getTextTypeDataFromColumn(csvRecord, PHONE_NO)));
-            clients.add(client);
+            if (!csvRecord.get(0).equals("")) {
+                Client client = new Client();
+                client.setFirst_name(getTextTypeDataFromColumn(csvRecord, FIRST_NAME));
+                client.setLast_name(getTextTypeDataFromColumn(csvRecord, LAST_NAME));
+                client.setBirth_date(getTimeTypeDataFromColumn(csvRecord, BIRTH_DATE));
+                client.setPhone_no((getTextTypeDataFromColumn(csvRecord, PHONE_NO)));
+                clients.add(client);
+            }
         }
         return clients;
     }

@@ -36,7 +36,7 @@ public class ClientService {
     }
 
     public List<ClientDTO> getAllClients() {
-        return clientRepository.findAll()
+        return ((List<Client>) clientRepository.findAll())
                 .stream()
                 .map(this::mapClientToClientDTO)
                 .collect(Collectors.toList());
