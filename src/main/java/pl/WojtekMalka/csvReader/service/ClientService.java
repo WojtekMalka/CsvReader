@@ -9,6 +9,7 @@ import pl.WojtekMalka.csvReader.entity.Client;
 import pl.WojtekMalka.csvReader.repository.ClientRepository;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,10 +27,6 @@ public class ClientService {
         }
     }
 
-    private List<Client> creatClientsFromCSVFile(MultipartFile file) throws IOException {
-        return FileReader.readCSV(file.getInputStream());
-    }
-
     public long getClientsNumber() {
         return clientRepository.count();
     }
@@ -39,6 +36,22 @@ public class ClientService {
                 .stream()
                 .map(this::mapClientToClientDTO)
                 .collect(Collectors.toList());
+    }
+
+    public List<ClientDTO> getClientsListSortedByAge() {
+        return getAllClients().stream()
+                .sorted(Comparator.comparingLong(ClientDTO::getClient_age))
+                .collect(Collectors.toList());
+    }
+
+    public ClientDTO getOldestClient(){
+        return getAllClients().stream()
+                .sorted(Comparator.comparingLong(ClientDTO::getClient_age).reversed())
+                .findFirst().get();
+    }
+
+    private List<Client> creatClientsFromCSVFile(MultipartFile file) throws IOException {
+        return FileReader.readCSV(file.getInputStream());
     }
 
     private ClientDTO mapClientToClientDTO(Client client) {

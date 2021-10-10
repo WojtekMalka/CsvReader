@@ -14,6 +14,7 @@ import pl.WojtekMalka.csvReader.message.ResponseMessage;
 import pl.WojtekMalka.csvReader.service.ClientService;
 import pl.WojtekMalka.csvReader.service.FileReader;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 @RestController

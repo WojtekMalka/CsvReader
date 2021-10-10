@@ -21,9 +21,6 @@ public class ClientControllerREST {
 
     @GetMapping("/countAll")
     ResponseEntity<Long> countAll() {
-        if (Objects.isNull(Long.valueOf(clientService.getClientsNumber()))) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
         return ResponseEntity.status(HttpStatus.OK).body(clientService.getClientsNumber());
     }
 
@@ -35,12 +32,20 @@ public class ClientControllerREST {
         return ResponseEntity.status(HttpStatus.OK).body(clientService.getAllClients());
     }
 
-//    @GetMapping("/getClientsListSortedByAge")
-//    ResponseEntity<List<ClientDTO>> getClientsListSortedByAge() {
-//        if (clientService.getClientsListSortedByAge().isEmpty()) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
-//        return ResponseEntity.status(HttpStatus.OK).body(clientService.getClientsListSortedByAge());
-//    }
+    @GetMapping("/getClientsListSortedByAge")
+    ResponseEntity<List<ClientDTO>> getClientsListSortedByAge() {
+        if (clientService.getClientsListSortedByAge().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(clientService.getClientsListSortedByAge());
+    }
+
+    @GetMapping("/getOldestClient")
+    ResponseEntity<ClientDTO> getOldestClient() {
+        if (Objects.isNull(clientService.getOldestClient())) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(clientService.getOldestClient());
+    }
 }
 
