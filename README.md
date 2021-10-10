@@ -16,16 +16,15 @@ and do the following:
 - remove the selected user or the entire list from the database,
 - search for users by surname.
 
-Available requests:
-
+###Available requests:
 POST:
-/loadFile
+- /loadFile
 
 GET:
-/client/countAll
-/client/getAll
-/client/getClientsListSortedByAge
-/client/getOldestClient
+- /client/countAll
+- /client/getAll
+- /client/getClientsListSortedByAge
+- /client/getOldestClient
 
 ## Technologies
 Project is created with:
