@@ -2,14 +2,12 @@ package pl.WojtekMalka.csvReader.service;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pl.WojtekMalka.csvReader.DTO.ClientDTO;
 import pl.WojtekMalka.csvReader.entity.Client;
 import pl.WojtekMalka.csvReader.repository.ClientRepository;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class ClientService {
-
+    private static final ModelMapper modelMapper = new ModelMapper();
     private final ClientRepository clientRepository;
 
     public void save(MultipartFile file) {
@@ -44,8 +42,6 @@ public class ClientService {
     }
 
     private ClientDTO mapClientToClientDTO(Client client) {
-        ModelMapper modelMapper = (ModelMapper) new ModelMapper().getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.LOOSE);
         ClientDTO clientDTO = modelMapper
                 .map(client, ClientDTO.class);
         return clientDTO;
