@@ -3,6 +3,7 @@ CSV reader application
 
 ## Table of contents
 * [General info](#general-info)
+* [Requests](#available-requests)
 * [Technologies](#technologies)
 * [Setup](#setup)
 
@@ -16,7 +17,7 @@ and do the following:
 - remove the selected user or the entire list from the database,
 - search for users by surname.
 
-###Available requests:
+##Available requests:
 POST:
 - /loadFile
 
